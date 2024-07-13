@@ -141,12 +141,15 @@ def generate_pdf(documentation, filename):
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, documentation)
-    
+
+    for line in documentation.split('\n'):
+        pdf.multi_cell(0, 10, line)
+
     pdf_output_path = os.path.join('static/pdfs', filename)
     pdf.output(pdf_output_path)
     
     return filename
+
 
 def generate_flowchart(vba_code):
     dot = graphviz.Digraph(comment='VBA Macro Flow')
