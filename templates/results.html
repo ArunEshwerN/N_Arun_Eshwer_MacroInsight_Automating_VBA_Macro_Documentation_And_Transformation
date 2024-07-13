@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>VBA Code Analysis Results</h2>
+
+    <h3>VBA Code Extracted</h3>
+    <pre>{{ vba_code }}</pre>
+    <hr>
+
+    <div style="margin-top: 20px;">
+        <h3>Analysis Overview</h3>
+        <ul>
+            {% for line in documentation %}
+            {% if 'Procedure' in line or 'Function' in line or 'Variable' in line or 'Loop' in line or 'Conditional' in
+            line %}
+            <li>{{ line }}</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <hr>
+
+    <h3>Flowchart</h3>
+    <img src="{{ url_for('static', filename=flowchart_path) }}" alt="VBA Macro Flowchart">
+
+    <hr>
+
+    <h3>Code Quality and Efficiency</h3>
+    <ul>
+        <li>Score: {{ analysis_results.code_quality.score }}</li>
+        <li>Potential Inefficiencies:</li>
+        <ul>
+            {% for inefficiency in analysis_results.code_quality.inefficiencies %}
+            <li>{{ inefficiency }}</li>
+            {% endfor %}
+        </ul>
+        <li>Redundant Code:</li>
+        <ul>
+            {% for redundant in analysis_results.code_quality.redundancies %}
+            <li>{{ redundant }}</li>
+            {% endfor %}
+        </ul>
+        <li>Optimization Opportunities:</li>
+        <ul>
+            {% for optimization in analysis_results.code_quality.optimizations %}
+            <li>{{ optimization }}</li>
+            {% endfor %}
+        </ul>
+    </ul>
+    <hr>
+
+    <h3>Data Flow Analysis</h3>
+    <ul>
+        <li>Bottlenecks:</li>
+        <ul>
+            {% for bottleneck in analysis_results.data_flow_analysis.bottlenecks %}
+            <li>{{ bottleneck }}</li>
+            {% endfor %}
+        </ul>
+        <li>Optimization Opportunities:</li>
+        <ul>
+            {% for optimization in analysis_results.data_flow_analysis.optimizations %}
+            <li>{{ optimization }}</li>
+            {% endfor %}
+        </ul>
+    </ul>
+    <hr>
+
+    <h3>Detailed Analysis</h3>
+    <pre>
+        {% for line in documentation %}
+            {{ line }}
+        {% endfor %}
+    </pre>
+    <hr>
+
+    <h3>Download Documentation</h3>
+    <a href="{{ url_for('download_pdf', filename=pdf_filename) }}" class="button">Download PDF</a>
+</div>
+{% endblock %}

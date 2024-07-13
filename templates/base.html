@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>MacroInsight</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="container">
+                <h1>MacroInsight: VBA Macro Analysis Tool</h1>
+            </div>
+        </header>
+        <main class="container">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    <footer>
+        <div class="container">
+            <p>SocGen Hackathon Project - Done By: N. Arun Eshwer, G. Harri Sasthaa</p>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
